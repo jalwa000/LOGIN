@@ -1,54 +1,85 @@
-import React, { useState } from 'react';
-import  Failure from './failure';
-import  Success  from './success';
+import React, { useState } from "react";
+import Success from "./components/success";
+import Failur from "./components/failur";
 
- function Login() {
-     const [isLoggedin, setIsloggedin] = useState(false);
-     const [user, setUser] = useState({})
-     const [users, setUsers] = useState([
-         {
-         id: '1',
-         name: "noor",
-         password: '1234'
-     },
-     {
-        id: '2',
-        name: "Hamid",
-        password: '4321'
+const App = () => {
+  const [user, setUser] = useState({});
+
+  const [allUsers] = useState([
+    {
+      id: "1",
+      userName: "fahim",
+      password: "ahmadi"
     },
     {
-        id: '3',
-        name: "Farshid",
-        password: '5678'
+      id: "2",
+      userName: "hamid",
+      password: "nikoo"
+    },
+    {
+      id: "3",
+      userName: "nidal",
+      password: "alshahaf"
+    },
+    {
+      id: "4",
+      userName: "saood",
+      password: "Akhtar"
     }
+  ]);
+  const [loginf, setLoginf] = useState("");
+  const [logins, setLogins] = useState("");
 
-    ])
-    const handleChange = e =>{
-        setUser({ ...user, [e.target.name]: e.target.value})
-    };
+  const changeHandler = event => {
+    setUser({ ...user, [event.target.name]: event.target.value });
+  };
 
+  const submitForm = event => {
+    event.preventDefault();
+    allUsers.map(u => {
+      if (u.userName === user.userName && u.password === user.password) {
+        setLogins("true");
+        return null;
+      }
+      setLoginf("false");
+      return null;
+    });
+  };
 
-    return (
+  return (
+    <div className="container col-3 center border mt-5 rounded">
+      <div className="container m-3 p-3 col-11">
+        <form onSubmit={submitForm}>
+          UserName:{" "}
+          <input
+            type="text"
+            name="userName"
+            onChange={changeHandler}
+            className="form-control mb-4"
+          />
+          Password{" "}
+          <input
+            type="text"
+            name="password"
+            onChange={changeHandler}
+            className="form-control"
+          />
+          <input
+            type="submit"
+            className="btn btn-success form-control mt-4"
+            value="Login"
+          />
+        </form>
         <div>
-            <form onSubmit={(event)=>{
-                event.preventDefault();
-                users.map(u => {
-                    u.name === user.name && u.password === user.password && 
-                        setIsloggedin(true)
-                });
-
-               /*  isLoggedin ? console.log("you are successfully logged in") : console.log("Sorry") */
-            }}>
-                <label >Name:</label>
-                <input className="rounded-pill border border-danger" type="text" name="name" onChange={handleChange} />
-                <label >Password:</label>
-                <input className="rounded-pill border border-danger" type="text" name="password" onChange={handleChange} />
-                <input className="rounded-pill btn btn-danger " type="submit" value="Login"/>
-            </form>
-
-        {isLoggedin ? <Success /> : <Failure />}
+          {logins === "true" ? (
+            <Success />
+          ) : loginf === "false" ? (
+            <Failur />
+          ) : null}
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
- export default Login
+export default App;
