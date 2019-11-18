@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Success from "./success";
 import Failure from "./failure";
+import Image from "./logo.png";
 
 const App = () => {
   const [user, setUser] = useState({});
@@ -8,25 +9,26 @@ const App = () => {
   const [allUsers] = useState([
     {
       id: "1",
-      userName: "fahim",
-      password: "ahmadi"
+      userName: "GUL",
+      password: "JAN"
     },
     {
       id: "2",
-      userName: "hamid",
-      password: "nikoo"
+      userName: "SANAM",
+      password: "JAN"
     },
     {
       id: "3",
-      userName: "nidal",
-      password: "alshahaf"
+      userName: "ALAM",
+      password: "JAN"
     },
     {
       id: "4",
-      userName: "saood",
-      password: "Akhtar"
+      userName: "AWAL",
+      password: "JAN"
     }
   ]);
+
   const [loginf, setLoginf] = useState("");
   const [logins, setLogins] = useState("");
 
@@ -47,10 +49,14 @@ const App = () => {
   };
 
   return (
-    <div className="container col-3 center border mt-5 rounded">
+    <div className="container col-3 center border mt-5   bg-secondary text-warning">
+      <img src={Image} className="ml-3" alt="" />
+
+      <h1 className="ml-4">LOG IN</h1>
+
       <div className="container m-3 p-3 col-11">
         <form onSubmit={submitForm}>
-          UserName:{" "}
+          Username{" "}
           <input
             type="text"
             name="userName"
@@ -66,7 +72,7 @@ const App = () => {
           />
           <input
             type="submit"
-            className="btn btn-success form-control mt-4"
+            className="btn btn-warning form-control mt-4"
             value="Login"
           />
         </form>
